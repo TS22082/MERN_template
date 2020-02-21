@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
-
 const logger = require("morgan");
 const PORT = process.env.PORT || 5000;
-
 const mongoose = require("mongoose");
 const MONGO_URI =
   process.env.MONGODB_URI || "mongodb://localhost/deploy_todoDB";
