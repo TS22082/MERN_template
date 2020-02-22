@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 
 const apiRoutes = require("./routes/api-routes");
 app.use("/", apiRoutes);

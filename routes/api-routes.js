@@ -8,8 +8,8 @@ router.get("/all", (req, res) => {
   });
 });
 
-router.get("/find/:id", (req, res) => {
-  db.Todo.find({ _id: req.params.id }).then(foundTodo => {
+router.get("/find", (req, res) => {
+  db.Todo.find({ _id: req.body.id }).then(foundTodo => {
     res.send(foundTodo);
   });
 });
@@ -23,18 +23,19 @@ router.post("/new", (req, res) => {
 });
 
 router.patch("/update", (req, res) => {
-  db.Todo.findOneAndUpdate(
-    { _id: req.query.id },
-    { text: req.query.text }
-  ).then(updatedTodo => {
-    res.send({ message: "success", todo: updatedTodo });
-  });
+  db.Todo.findOneAndUpdate({ _id: req.body.id }, { text: req.body.text }).then(
+    updatedTodo => {
+      res.send({ message: "success", todo: updatedTodo });
+    }
+  );
 });
 
-router.delete("/delete/:id", (req, res) => {
-  db.Todo.deleteOne({ _id: req.params.id }).then(() => {
-    res.send("success");
-  });
+router.delete("/delete", (req, res) => {
+  db.Todo.deleteOne({ _id: req.query.id })
+    .then(() => {
+      res.send("success");
+    })
+    .catch(err => res.send(err));
 });
 
 module.exports = router;
